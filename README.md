@@ -119,6 +119,30 @@ potentially benefit from a **local caching proxy**. other frameworks may have se
 
 ------------------------------------------------------------------------
 
+# What to do if the certs expired
+If the certificates used by the local server expire, browsers may refuse to connect to the server or show security warnings. This happens because HTTPS certificates have a limited validity period.
+
+When the certificates expire, you need to generate new ones and replace the old files used by the server.
+
+1. First stop the local server.
+2. Delete or move the old certificate files from the project directory.
+3. Then generate new self-signed certificates using OpenSSL. Run the following command in the project directory:
+```
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 3650 -nodes
+```
+This command generates a new private key and certificate that will be valid for about ten years.
+
+
+Make sure the generated certificate and key filenames match the filenames expected by the server. If the project already uses specific filenames, replace the old files with the newly generated ones.
+
+After generating the new certificates, start the server again.
+
+Some browsers may still show warnings because the certificate is self-signed. If you are using Flutter for development, you can run the browser with the ignore certificate errors flag as described in the main documentation.
+
+If problems continue after replacing the certificates, clear the browser cache or restart the browser so it reloads the new certificate.
+
+------------------------------------------------------------------------
+
 # Features
 
 -   Local caching proxy for static resources
