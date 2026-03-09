@@ -17,72 +17,16 @@ before a blackout happens**.
 
 ------------------------------------------------------------------------
 
-# Features
-
--   Local caching proxy for static resources
--   Designed with **Flutter Web** compatibility in mind
--   Works on **localhost**
--   Automatically caches missing resources when internet access is
-    available
--   Allows applications to continue running when external CDNs become
-    unreachable
--   Can also be used for **other web projects**, not just Flutter
-
-------------------------------------------------------------------------
-
-# Educational Purpose & Disclaimer
-
-This project is provided **strictly for educational purposes, research,
-and resilience against internet blackouts**.
-
-It is intended to help developers understand:
-
--   offline infrastructure
--   CDN fallback mechanisms
--   caching proxies
--   resilience during network outages
-
-⚠️ **Important Notice**
-
-The author of this project **is not responsible for any misuse of this
-software**.
-
-If someone attempts to use this tool for: - bypassing services -
-violating terms of service - malicious activity - or any other misuse
-
-that responsibility lies **entirely with the user**.
-
-By using this project you agree that:
-
--   You understand the purpose is **educational and resilience testing**
--   You will **not use it in ways that violate laws or platform
-    policies**
--   The author **takes no responsibility for misuse**
-
-------------------------------------------------------------------------
-
-# How It Works
-
-1.  The local server acts as a **proxy/cache** for static resources.
-2.  When a resource is requested:
-    -   If it exists in the **local cache**, it is served immediately.
-    -   If it does **not exist**, the server requests the resource from
-        the real internet source.
-3.  The downloaded resource is then **stored locally** for future
-    requests.
-
-Once cached, the resource can be served **even if the internet is
-unavailable**.
-
-------------------------------------------------------------------------
-
 # Initial Setup (Caching Resources)
 
 Before using the server in an offline or blackout scenario:
 
+## If you have good internet access right now
+
 1.  Start the server **while internet access is available**
 2.  Run your application normally
 3.  Use the application for a while
+
 
 During this time the server will **automatically cache required
 resources**.
@@ -90,6 +34,36 @@ resources**.
 After enough resources are cached, the application will be able to
 **continue functioning without internet access**.
 
+## If your internet connection is poor right now
+1. You can **use a snapshot branch on this report**
+2. run your application, if there be no cache misses, everything will be good
+
+------------------------------------------------------------------------
+
+# Do before using
+this server runs on the localhost and for applicaiton to request this server instead of the real gstatic, you have to change the DNS settings,
+
+## windows
+1. use **WIN + R** to open run widnows, write **notepad** and use **cntrl + shift + enter** for administrator privileges.
+2. open the file hosts in the path `C:\Windows\System32\drivers\etc\hosts`
+3. add these lines in the files and save:
+```
+# Added by offline_gstatic
+127.0.0.1  www.gstatic.com
+127.0.0.1  gstatic.com
+127.0.0.1  fonts.gstatic.com
+# End of section
+```
+## linux
+1. with **sudo** access, use an editor to edit the hosts file located at `/etc/hosts`
+2. add these lines and save:
+```
+# Added by offline_gstatic
+127.0.0.1  www.gstatic.com
+127.0.0.1  gstatic.com
+127.0.0.1  fonts.gstatic.com
+# End of section
+```
 ------------------------------------------------------------------------
 
 # Usage with Flutter
@@ -130,7 +104,7 @@ Although built for Flutter, this server can also be used with:
 -   offline development environments
 
 Any project that normally loads resources from external CDNs can
-potentially benefit from a **local caching proxy**.
+potentially benefit from a **local caching proxy**. other frameworks may have setting to disable live static loadings, flutter doesnt allow it for the gstatic files; It is better to try that way first.
 
 ------------------------------------------------------------------------
 
@@ -142,6 +116,65 @@ potentially benefit from a **local caching proxy**.
 4.  Allow the server to cache required assets
 5.  Once cached, the application can continue working during network
     disruptions
+
+------------------------------------------------------------------------
+
+# Features
+
+-   Local caching proxy for static resources
+-   Designed with **Flutter Web** compatibility in mind
+-   Works on **localhost**
+-   Automatically caches missing resources when internet access is
+    available
+-   Allows applications to continue running when external CDNs become
+    unreachable
+-   Can also be used for **other web projects**, not just Flutter
+
+------------------------------------------------------------------------
+
+# Educational Purpose & Disclaimer
+
+This project is provided **strictly for educational purposes, research,
+and resilience against internet blackouts**.
+
+It is intended to help developers understand:
+
+-   offline infrastructure
+-   CDN fallback mechanisms
+-   caching proxies
+-   resilience during network outages
+
+------------------------------------------------------------------------
+
+# How It Works
+
+1.  The local server acts as a **proxy/cache** for static resources.
+2.  When a resource is requested:
+    -   If it exists in the **local cache**, it is served immediately.
+    -   If it does **not exist**, the server requests the resource from
+        the real internet source.
+3.  The downloaded resource is then **stored locally** for future
+    requests.
+
+Once cached, the resource can be served **even if the internet is
+unavailable**.
+
+⚠️ **Important Notice**
+
+The author of this project **is not responsible for any misuse of this
+software**.
+
+If someone attempts to use this tool for: - bypassing services -
+violating terms of service - malicious activity - or any other misuse
+
+that responsibility lies **entirely with the user**.
+
+By using this project you agree that:
+
+-   You understand the purpose is **educational and resilience testing**
+-   You will **not use it in ways that violate laws or platform
+    policies**
+-   The author **takes no responsibility for misuse**
 
 ------------------------------------------------------------------------
 
